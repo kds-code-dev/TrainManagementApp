@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -58,5 +59,14 @@ public class Main {
         trainConsist.removeLast();
         // Display final ordered train consist
         System.out.println("Final ordered train consist: " + trainConsist);
+
+        // Preserve insertion order using LinkedHashSet
+        LinkedHashSet<String> formation = new LinkedHashSet<>();
+        formation.add("Engine");
+        formation.add("Sleeper");
+        formation.add("Cargo");
+        formation.add("Guard");
+        formation.add("Sleeper"); // duplicate
+        System.out.println("Train formation: " + formation);
     }
 }
