@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Main class for the Train Consist Management App
@@ -89,6 +90,15 @@ public class Main {
         bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
         System.out.println("Bogies sorted by capacity:");
         for (Bogie b : bogies) {
+            System.out.println(b);
+        }
+
+        // Filter passenger bogies using Streams
+        List<Bogie> highCapacityBogies = bogies.stream()
+            .filter(b -> b.getCapacity() > 60)
+            .collect(Collectors.toList());
+        System.out.println("High capacity bogies:");
+        for (Bogie b : highCapacityBogies) {
             System.out.println(b);
         }
     }
