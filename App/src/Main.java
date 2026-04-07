@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -42,5 +43,20 @@ public class Main {
         bogieIds.add("BG102");
         bogieIds.add("BG101"); // duplicate
         System.out.println("Unique bogie IDs: " + bogieIds);
+
+        // Maintain ordered bogie IDs using LinkedList
+        LinkedList<String> trainConsist = new LinkedList<>();
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
+        // Insert Pantry Car at position 2
+        trainConsist.add(2, "Pantry Car");
+        // Remove first and last
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
+        // Display final ordered train consist
+        System.out.println("Final ordered train consist: " + trainConsist);
     }
 }
