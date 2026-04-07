@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -6,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Main class for the Train Consist Management App
@@ -78,6 +80,26 @@ public class Main {
         bogieCapacity.put("First Class", 40);
         for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue() + " seats");
+        }
+
+        // Sort bogies by capacity using Comparator
+        List<Bogie> bogies = new ArrayList<>();
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("First Class", 40));
+        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+        System.out.println("Bogies sorted by capacity:");
+        for (Bogie b : bogies) {
+            System.out.println(b);
+        }
+
+        // Filter passenger bogies using Streams
+        List<Bogie> highCapacityBogies = bogies.stream()
+            .filter(b -> b.getCapacity() > 60)
+            .collect(Collectors.toList());
+        System.out.println("High capacity bogies:");
+        for (Bogie b : highCapacityBogies) {
+            System.out.println(b);
         }
     }
 }
