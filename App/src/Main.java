@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Main class for the Train Consist Management App
@@ -33,5 +35,12 @@ public class Main {
         // Print final list state
         System.out.println("Final bogie count: " + consist.size());
         System.out.println("Final passenger bogies: " + consist);
+
+        // Track unique bogie IDs using HashSet
+        Set<String> bogieIds = new HashSet<>();
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG101"); // duplicate
+        System.out.println("Unique bogie IDs: " + bogieIds);
     }
 }
