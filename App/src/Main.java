@@ -1,19 +1,17 @@
-package com.example.trainmanagement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Main class for the Train Management Application
+ * Main class for the Train Consist Management App
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Welcome to Train Management App!");
+        System.out.println("=== Train Consist Management App ===");
 
-        // Create a sample train
-        Train train = new Train("Express 101", 10);
-        System.out.println("Created train: " + train.getName() + " with " + train.getCapacity() + " seats");
+        // Initialize an empty list for the train consist
+        List consist = new ArrayList();
 
-        // Book some seats
-        train.bookSeat(1);
-        train.bookSeat(2);
-        System.out.println("Booked seats 1 and 2. Available seats: " + train.getAvailableSeats());
+        // Display the initial bogie count
+        System.out.println("Initial bogie count: " + consist.size());
     }
 }
