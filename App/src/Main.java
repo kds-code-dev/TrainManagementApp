@@ -190,5 +190,68 @@ public class Main {
             System.out.println("  - " + bogie);
         }
         System.out.println("Train Formation Safety Status: " + (isUnsafeCompliant ? "SAFE" : "UNSAFE"));
+
+        // UC13: Performance Comparison (Loops vs Streams)
+        // Create a large collection of bogies for performance testing
+        List<Bogie> performanceTestBogies = new ArrayList<>();
+        performanceTestBogies.add(new Bogie("Sleeper", 72));
+        performanceTestBogies.add(new Bogie("AC Chair", 60));
+        performanceTestBogies.add(new Bogie("First Class", 40));
+        performanceTestBogies.add(new Bogie("Sleeper", 72));
+        performanceTestBogies.add(new Bogie("AC Chair", 60));
+        
+        // Generate a large dataset for better benchmarking
+        for (int i = 0; i < 100000; i++) {
+            performanceTestBogies.add(new Bogie("Sleeper", 72));
+            performanceTestBogies.add(new Bogie("AC Chair", 60));
+            performanceTestBogies.add(new Bogie("First Class", 40));
+        }
+
+        System.out.println("\nPerformance Comparison (Loops vs Streams):");
+        System.out.println("Dataset size: " + performanceTestBogies.size() + " bogies");
+
+        // Measure loop-based filtering
+        long startTimeLoop = System.nanoTime();
+        List<Bogie> loopFilteredBogies = new ArrayList<>();
+        for (Bogie bogie : performanceTestBogies) {
+            if (bogie.getCapacity() > 60) {
+                loopFilteredBogies.add(bogie);
+            }
+        }
+        long endTimeLoop = System.nanoTime();
+        long loopElapsedTime = endTimeLoop - startTimeLoop;
+
+        // Measure stream-based filtering
+        long startTimeStream = System.nanoTime();
+        List<Bogie> streamFilteredBogies = performanceTestBogies.stream()
+            .filter(bogie -> bogie.getCapacity() > 60)
+            .collect(Collectors.toList());
+        long endTimeStream = System.nanoTime();
+        long streamElapsedTime = endTimeStream - startTimeStream;
+
+        // Display results
+        System.out.println("\nLoop-Based Filtering:");
+        System.out.println("  Filtered bogies: " + loopFilteredBogies.size());
+        System.out.println("  Execution time: " + loopElapsedTime + " nanoseconds");
+        System.out.println("  Execution time: " + (loopElapsedTime / 1_000_000.0) + " milliseconds");
+
+        System.out.println("\nStream-Based Filtering:");
+        System.out.println("  Filtered bogies: " + streamFilteredBogies.size());
+        System.out.println("  Execution time: " + streamElapsedTime + " nanoseconds");
+        System.out.println("  Execution time: " + (streamElapsedTime / 1_000_000.0) + " milliseconds");
+
+        // Verify consistency
+        boolean resultsMatch = loopFilteredBogies.size() == streamFilteredBogies.size();
+        System.out.println("\nConsistency Check:");
+        System.out.println("  Results match: " + resultsMatch);
+
+        // Performance comparison
+        if (loopElapsedTime < streamElapsedTime) {
+            double speedup = (double) streamElapsedTime / loopElapsedTime;
+            System.out.println("  Loop is " + String.format("%.2f", speedup) + "x faster than Stream");
+        } else {
+            double speedup = (double) loopElapsedTime / streamElapsedTime;
+            System.out.println("  Stream is " + String.format("%.2f", speedup) + "x faster than Loop");
+        }
     }
 }

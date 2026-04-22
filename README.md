@@ -24,6 +24,7 @@ Each use case introduces Java concepts through railway scenarios:
 9. **Aggregation**: Counting total seats using Stream reduce
 10. **Regex Validation**: Validating Train ID and Cargo Code formats using Pattern and Matcher
 11. **Safety Compliance Check**: Validating goods bogies using Stream allMatch() with conditional safety rules
+12. **Performance Comparison**: Benchmarking loop-based vs stream-based filtering using System.nanoTime()
 
 ## Prerequisites
 
@@ -74,3 +75,4 @@ TrainManagementApp/
 - Object-Oriented Programming
 - Functional Programming paradigms
 - Business rule validation and safety compliance
+- Performance benchmarking and measurement-driven optimization
