@@ -15,6 +15,22 @@ public class GoodBogie {
         return cargo;
     }
 
+    /**
+     * Safely assigns cargo to the bogie with validation
+     * @param newCargo The cargo to assign
+     * @throws CargoSafetyException if the cargo assignment is unsafe
+     */
+    public void assignCargo(String newCargo) {
+        // Validate cargo-shape compatibility
+        if (type.equals("Rectangular") && newCargo.equals("Petroleum")) {
+            throw new CargoSafetyException(
+                "Error: Petroleum cannot be assigned to Rectangular bogie. " +
+                "Rectangular bogies are not designed to carry liquid cargo."
+            );
+        }
+        this.cargo = newCargo;
+    }
+
     @Override
     public String toString() {
         return type + " bogie carrying " + cargo;

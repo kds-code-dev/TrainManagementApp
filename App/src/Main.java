@@ -315,5 +315,71 @@ public class Main {
         } catch (InvalidCapacityException e) {
             System.out.println("✗ Exception caught: " + e.getMessage());
         }
+
+        // UC15: Safe Cargo Assignment Using try-catch-finally
+        System.out.println("\nSafe Cargo Assignment Using try-catch-finally:");
+
+        // Test case 1: Safe cargo assignment (Cylindrical bogie with Petroleum)
+        System.out.println("\nTest 1: Safe assignment (Cylindrical with Petroleum)");
+        GoodBogie cylindricalBogie = new GoodBogie("Cylindrical", null);
+        try {
+            cylindricalBogie.assignCargo("Petroleum");
+            System.out.println("✓ Safe assignment succeeded: " + cylindricalBogie);
+        } catch (CargoSafetyException e) {
+            System.out.println("✗ Safety exception: " + e.getMessage());
+        } finally {
+            System.out.println("→ Finally block: Cargo assignment validation complete");
+        }
+
+        // Test case 2: Unsafe cargo assignment (Rectangular bogie with Petroleum)
+        System.out.println("\nTest 2: Unsafe assignment (Rectangular with Petroleum)");
+        GoodBogie rectangularBogie = new GoodBogie("Rectangular", null);
+        try {
+            rectangularBogie.assignCargo("Petroleum");
+            System.out.println("✓ Assignment succeeded: " + rectangularBogie);
+        } catch (CargoSafetyException e) {
+            System.out.println("✗ Safety exception caught: " + e.getMessage());
+        } finally {
+            System.out.println("→ Finally block: Cargo assignment validation complete");
+        }
+
+        // Test case 3: Verify rectangular bogie still has null cargo after failed assignment
+        System.out.println("\nTest 3: Verify cargo not assigned after failure");
+        System.out.println("Rectangular bogie cargo after failed assignment: " + rectangularBogie.getCargo());
+
+        // Test case 4: Safe assignment for rectangular bogie with suitable cargo
+        System.out.println("\nTest 4: Safe assignment (Rectangular with Coal)");
+        try {
+            rectangularBogie.assignCargo("Coal");
+            System.out.println("✓ Safe assignment succeeded: " + rectangularBogie);
+        } catch (CargoSafetyException e) {
+            System.out.println("✗ Safety exception: " + e.getMessage());
+        } finally {
+            System.out.println("→ Finally block: Cargo assignment validation complete");
+        }
+
+        // Test case 5: Multiple cargo assignments showing program continuation
+        System.out.println("\nTest 5: Multiple cargo assignments (demonstrating program continuation)");
+        GoodBogie[] goodBogies = {
+            new GoodBogie("Cylindrical", null),
+            new GoodBogie("Rectangular", null),
+            new GoodBogie("Open", null),
+            new GoodBogie("Box", null)
+        };
+
+        String[] cargoAssignments = {"Petroleum", "Coal", "Grain", "Machinery"};
+
+        for (int i = 0; i < goodBogies.length; i++) {
+            try {
+                goodBogies[i].assignCargo(cargoAssignments[i]);
+                System.out.println("✓ Assignment " + (i + 1) + ": " + goodBogies[i]);
+            } catch (CargoSafetyException e) {
+                System.out.println("✗ Assignment " + (i + 1) + " failed: " + e.getMessage());
+            } finally {
+                System.out.println("  → Validation complete for bogie " + (i + 1));
+            }
+        }
+
+        System.out.println("\n✓ All cargo assignment tests completed. Application is stable.");
     }
 }

@@ -26,6 +26,7 @@ Each use case introduces Java concepts through railway scenarios:
 11. **Safety Compliance Check**: Validating goods bogies using Stream allMatch() with conditional safety rules
 12. **Performance Comparison**: Benchmarking loop-based vs stream-based filtering using System.nanoTime()
 13. **Custom Exception Handling**: Enforcing capacity constraints using InvalidCapacityException
+14. **Safe Cargo Assignment**: Handling runtime exceptions with try-catch-finally using CargoSafetyException
 
 ## Prerequisites
 
@@ -66,6 +67,7 @@ TrainManagementApp/
 │       ├── Bogie.java
 │       ├── GoodBogie.java
 │       ├── InvalidCapacityException.java
+│       ├── CargoSafetyException.java
 │       └── Main.java
 ```
 
