@@ -381,5 +381,76 @@ public class Main {
         }
 
         System.out.println("\n✓ All cargo assignment tests completed. Application is stable.");
+
+        // UC16: Sort Passenger Bogies by Capacity (Bubble Sort – Algorithm Intro)
+        System.out.println("\nBubble Sort - Sorting Passenger Bogie Capacities:");
+
+        // Test case 1: Basic unsorted array
+        int[] capacities1 = {72, 56, 24, 70, 60};
+        System.out.println("\nTest 1: Basic unsorted array");
+        System.out.println("Original capacities: " + java.util.Arrays.toString(capacities1));
+        bubbleSort(capacities1);
+        System.out.println("Sorted capacities:   " + java.util.Arrays.toString(capacities1));
+
+        // Test case 2: Already sorted array
+        int[] capacities2 = {24, 56, 60, 70, 72};
+        System.out.println("\nTest 2: Already sorted array");
+        System.out.println("Original capacities: " + java.util.Arrays.toString(capacities2));
+        bubbleSort(capacities2);
+        System.out.println("Sorted capacities:   " + java.util.Arrays.toString(capacities2));
+
+        // Test case 3: Duplicate values
+        int[] capacities3 = {72, 56, 56, 24};
+        System.out.println("\nTest 3: Duplicate capacity values");
+        System.out.println("Original capacities: " + java.util.Arrays.toString(capacities3));
+        bubbleSort(capacities3);
+        System.out.println("Sorted capacities:   " + java.util.Arrays.toString(capacities3));
+
+        // Test case 4: Single element array
+        int[] capacities4 = {50};
+        System.out.println("\nTest 4: Single element array");
+        System.out.println("Original capacities: " + java.util.Arrays.toString(capacities4));
+        bubbleSort(capacities4);
+        System.out.println("Sorted capacities:   " + java.util.Arrays.toString(capacities4));
+
+        // Test case 5: All equal values
+        int[] capacities5 = {40, 40, 40};
+        System.out.println("\nTest 5: All equal capacity values");
+        System.out.println("Original capacities: " + java.util.Arrays.toString(capacities5));
+        bubbleSort(capacities5);
+        System.out.println("Sorted capacities:   " + java.util.Arrays.toString(capacities5));
+
+        // Test case 6: Reverse sorted array (worst case for bubble sort)
+        int[] capacities6 = {72, 60, 56, 40, 24};
+        System.out.println("\nTest 6: Reverse sorted array (worst case)");
+        System.out.println("Original capacities: " + java.util.Arrays.toString(capacities6));
+        bubbleSort(capacities6);
+        System.out.println("Sorted capacities:   " + java.util.Arrays.toString(capacities6));
+
+        System.out.println("\n✓ Bubble Sort demonstration completed.");
+    }
+
+    /**
+     * Bubble Sort algorithm to sort passenger bogie capacities
+     * Time Complexity: O(n²)
+     * Space Complexity: O(1)
+     * @param capacities Array of bogie capacities to sort
+     */
+    public static void bubbleSort(int[] capacities) {
+        int n = capacities.length;
+        
+        // Outer loop for multiple passes
+        for (int i = 0; i < n - 1; i++) {
+            // Inner loop for comparing adjacent elements
+            for (int j = 0; j < n - i - 1; j++) {
+                // Compare adjacent elements
+                if (capacities[j] > capacities[j + 1]) {
+                    // Swap if left element is greater than right element
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
     }
 }

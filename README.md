@@ -27,6 +27,7 @@ Each use case introduces Java concepts through railway scenarios:
 12. **Performance Comparison**: Benchmarking loop-based vs stream-based filtering using System.nanoTime()
 13. **Custom Exception Handling**: Enforcing capacity constraints using InvalidCapacityException
 14. **Safe Cargo Assignment**: Handling runtime exceptions with try-catch-finally using CargoSafetyException
+15. **Bubble Sort Algorithm**: Sorting passenger bogie capacities using manual algorithm without library methods
 
 ## Prerequisites
 
@@ -71,6 +72,10 @@ TrainManagementApp/
 │       └── Main.java
 ```
 
+## Key Algorithms Implemented
+
+- **Bubble Sort**: O(n²) comparison-based sorting algorithm demonstrating fundamental algorithmic concepts
+
 ## Concepts Demonstrated
 
 - Collections Framework (List, Set, Map)
@@ -82,3 +87,5 @@ TrainManagementApp/
 - Performance benchmarking and measurement-driven optimization
 - Custom Exceptions and Error Handling (try-catch-throw)
 - Fail-fast validation patterns
+- Algorithmic thinking and sorting fundamentals
+- Array manipulation and nested loop processing
