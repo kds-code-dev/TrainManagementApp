@@ -154,5 +154,41 @@ public class Main {
             boolean isValid = matcher.matches();
             System.out.println("Cargo Code: " + cargoCode + " - " + (isValid ? "Valid" : "Invalid"));
         }
+
+        // UC12: Safety Compliance Check for Goods Bogies
+        // Create a list of goods bogies with type and cargo
+        List<GoodBogie> goodsBogies = new ArrayList<>();
+        goodsBogies.add(new GoodBogie("Cylindrical", "Petroleum"));
+        goodsBogies.add(new GoodBogie("Rectangular", "Coal"));
+        goodsBogies.add(new GoodBogie("Cylindrical", "Petroleum"));
+        goodsBogies.add(new GoodBogie("Open", "Grain"));
+
+        // Check safety compliance: Cylindrical bogies must carry only Petroleum
+        boolean isSafeCompliant = goodsBogies.stream()
+            .allMatch(bogie -> !bogie.getType().equals("Cylindrical") || bogie.getCargo().equals("Petroleum"));
+
+        // Display safety compliance result
+        System.out.println("Safety Compliance Check for Goods Bogies:");
+        System.out.println("Goods Bogies in Formation:");
+        for (GoodBogie bogie : goodsBogies) {
+            System.out.println("  - " + bogie);
+        }
+        System.out.println("Train Formation Safety Status: " + (isSafeCompliant ? "SAFE" : "UNSAFE"));
+
+        // Test case with violation
+        System.out.println("\nTesting Safety Compliance with Violation:");
+        List<GoodBogie> unsafeBogies = new ArrayList<>();
+        unsafeBogies.add(new GoodBogie("Cylindrical", "Petroleum"));
+        unsafeBogies.add(new GoodBogie("Cylindrical", "Coal"));  // Violation!
+        unsafeBogies.add(new GoodBogie("Rectangular", "Grain"));
+
+        boolean isUnsafeCompliant = unsafeBogies.stream()
+            .allMatch(bogie -> !bogie.getType().equals("Cylindrical") || bogie.getCargo().equals("Petroleum"));
+
+        System.out.println("Unsafe Bogies in Formation:");
+        for (GoodBogie bogie : unsafeBogies) {
+            System.out.println("  - " + bogie);
+        }
+        System.out.println("Train Formation Safety Status: " + (isUnsafeCompliant ? "SAFE" : "UNSAFE"));
     }
 }

@@ -23,6 +23,7 @@ Each use case introduces Java concepts through railway scenarios:
 8. **Grouping**: Grouping bogies by type using Collectors.groupingBy
 9. **Aggregation**: Counting total seats using Stream reduce
 10. **Regex Validation**: Validating Train ID and Cargo Code formats using Pattern and Matcher
+11. **Safety Compliance Check**: Validating goods bogies using Stream allMatch() with conditional safety rules
 
 ## Prerequisites
 
@@ -61,13 +62,15 @@ TrainManagementApp/
 ├── App/
 │   └── src/
 │       ├── Bogie.java
+│       ├── GoodBogie.java
 │       └── Main.java
 ```
 
 ## Concepts Demonstrated
 
 - Collections Framework (List, Set, Map)
-- Stream API (filtering, grouping, reduction)
+- Stream API (filtering, grouping, reduction, allMatch)
 - Regular Expressions (Pattern, Matcher)
 - Object-Oriented Programming
 - Functional Programming paradigms
+- Business rule validation and safety compliance
