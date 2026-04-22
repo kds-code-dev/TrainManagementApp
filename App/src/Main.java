@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -127,5 +129,30 @@ public class Main {
 
         // Display the total seating capacity
         System.out.println("Total seating capacity of the train: " + totalSeats + " seats");
+
+        // UC11: Validate Train ID & Cargo Codes (Regex)
+        // Define regex patterns
+        Pattern trainIdPattern = Pattern.compile("TRN-\\d{4}");
+        Pattern cargoCodePattern = Pattern.compile("PET-[A-Z]{2}");
+
+        // Sample Train IDs and Cargo Codes for validation
+        String[] trainIds = {"TRN-1234", "TRAIN12", "TRN12A", "1234-TRN"};
+        String[] cargoCodes = {"PET-AB", "PET-ab", "PET123", "AB-PET"};
+
+        // Validate Train IDs
+        System.out.println("Train ID Validation:");
+        for (String trainId : trainIds) {
+            Matcher matcher = trainIdPattern.matcher(trainId);
+            boolean isValid = matcher.matches();
+            System.out.println("Train ID: " + trainId + " - " + (isValid ? "Valid" : "Invalid"));
+        }
+
+        // Validate Cargo Codes
+        System.out.println("Cargo Code Validation:");
+        for (String cargoCode : cargoCodes) {
+            Matcher matcher = cargoCodePattern.matcher(cargoCode);
+            boolean isValid = matcher.matches();
+            System.out.println("Cargo Code: " + cargoCode + " - " + (isValid ? "Valid" : "Invalid"));
+        }
     }
 }
