@@ -101,5 +101,22 @@ public class Main {
         for (Bogie b : highCapacityBogies) {
             System.out.println(b);
         }
+
+        // UC9: Group Bogies by Type (Collectors.groupingBy)
+        // Add more bogies for grouping demonstration
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("First Class", 40));
+        bogies.add(new Bogie("Sleeper", 72));
+
+        // Group bogies by type using Collectors.groupingBy
+        Map<String, List<Bogie>> groupedBogies = bogies.stream()
+            .collect(Collectors.groupingBy(Bogie::getName));
+
+        // Print the grouped bogie structure
+        System.out.println("Bogies grouped by type:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
     }
 }
