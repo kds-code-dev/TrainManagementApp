@@ -118,5 +118,14 @@ public class Main {
         for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+
+        // UC10: Count Total Seats in Train (reduce)
+        // Calculate total seating capacity using stream reduce
+        int totalSeats = bogies.stream()
+            .map(b -> b.getCapacity())
+            .reduce(0, Integer::sum);
+
+        // Display the total seating capacity
+        System.out.println("Total seating capacity of the train: " + totalSeats + " seats");
     }
 }
