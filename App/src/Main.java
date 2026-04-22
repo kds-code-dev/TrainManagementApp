@@ -86,9 +86,13 @@ public class Main {
 
         // Sort bogies by capacity using Comparator
         List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 60));
-        bogies.add(new Bogie("First Class", 40));
+        try {
+            bogies.add(new Bogie("Sleeper", 72));
+            bogies.add(new Bogie("AC Chair", 60));
+            bogies.add(new Bogie("First Class", 40));
+        } catch (InvalidCapacityException e) {
+            System.out.println("Error creating bogies: " + e.getMessage());
+        }
         bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
         System.out.println("Bogies sorted by capacity:");
         for (Bogie b : bogies) {
@@ -106,10 +110,14 @@ public class Main {
 
         // UC9: Group Bogies by Type (Collectors.groupingBy)
         // Add more bogies for grouping demonstration
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 60));
-        bogies.add(new Bogie("First Class", 40));
-        bogies.add(new Bogie("Sleeper", 72));
+        try {
+            bogies.add(new Bogie("Sleeper", 72));
+            bogies.add(new Bogie("AC Chair", 60));
+            bogies.add(new Bogie("First Class", 40));
+            bogies.add(new Bogie("Sleeper", 72));
+        } catch (InvalidCapacityException e) {
+            System.out.println("Error adding bogies for grouping: " + e.getMessage());
+        }
 
         // Group bogies by type using Collectors.groupingBy
         Map<String, List<Bogie>> groupedBogies = bogies.stream()
@@ -194,17 +202,21 @@ public class Main {
         // UC13: Performance Comparison (Loops vs Streams)
         // Create a large collection of bogies for performance testing
         List<Bogie> performanceTestBogies = new ArrayList<>();
-        performanceTestBogies.add(new Bogie("Sleeper", 72));
-        performanceTestBogies.add(new Bogie("AC Chair", 60));
-        performanceTestBogies.add(new Bogie("First Class", 40));
-        performanceTestBogies.add(new Bogie("Sleeper", 72));
-        performanceTestBogies.add(new Bogie("AC Chair", 60));
-        
-        // Generate a large dataset for better benchmarking
-        for (int i = 0; i < 100000; i++) {
+        try {
             performanceTestBogies.add(new Bogie("Sleeper", 72));
             performanceTestBogies.add(new Bogie("AC Chair", 60));
             performanceTestBogies.add(new Bogie("First Class", 40));
+            performanceTestBogies.add(new Bogie("Sleeper", 72));
+            performanceTestBogies.add(new Bogie("AC Chair", 60));
+            
+            // Generate a large dataset for better benchmarking
+            for (int i = 0; i < 100000; i++) {
+                performanceTestBogies.add(new Bogie("Sleeper", 72));
+                performanceTestBogies.add(new Bogie("AC Chair", 60));
+                performanceTestBogies.add(new Bogie("First Class", 40));
+            }
+        } catch (InvalidCapacityException e) {
+            System.out.println("Error creating performance test bogies: " + e.getMessage());
         }
 
         System.out.println("\nPerformance Comparison (Loops vs Streams):");
@@ -252,6 +264,56 @@ public class Main {
         } else {
             double speedup = (double) loopElapsedTime / streamElapsedTime;
             System.out.println("  Stream is " + String.format("%.2f", speedup) + "x faster than Loop");
+        }
+
+        // UC14: Handle Invalid Bogie Capacity (Custom Exception)
+        System.out.println("\nCustom Exception Handling - Invalid Bogie Capacity:");
+
+        // Test case 1: Valid bogie creation
+        try {
+            Bogie validBogie = new Bogie("Sleeper", 72);
+            System.out.println("✓ Valid bogie created: " + validBogie);
+        } catch (InvalidCapacityException e) {
+            System.out.println("✗ Exception caught: " + e.getMessage());
+        }
+
+        // Test case 2: Negative capacity
+        try {
+            Bogie invalidBogie = new Bogie("AC Chair", -50);
+            System.out.println("✓ Bogie created: " + invalidBogie);
+        } catch (InvalidCapacityException e) {
+            System.out.println("✗ Negative capacity detected - Exception: " + e.getMessage());
+        }
+
+        // Test case 3: Zero capacity
+        try {
+            Bogie zeroCapacityBogie = new Bogie("First Class", 0);
+            System.out.println("✓ Bogie created: " + zeroCapacityBogie);
+        } catch (InvalidCapacityException e) {
+            System.out.println("✗ Zero capacity detected - Exception: " + e.getMessage());
+        }
+
+        // Test case 4: Multiple valid bogies
+        System.out.println("Creating multiple valid bogies:");
+        try {
+            List<Bogie> validBogies = new ArrayList<>();
+            validBogies.add(new Bogie("Sleeper", 72));
+            validBogies.add(new Bogie("AC Chair", 60));
+            validBogies.add(new Bogie("First Class", 40));
+            System.out.println("✓ All valid bogies created successfully");
+            for (Bogie bogie : validBogies) {
+                System.out.println("  - " + bogie);
+            }
+        } catch (InvalidCapacityException e) {
+            System.out.println("✗ Exception caught: " + e.getMessage());
+        }
+
+        // Test case 5: Large capacity value
+        try {
+            Bogie largeBogie = new Bogie("Super Sleeper", 500);
+            System.out.println("✓ Large capacity bogie created: " + largeBogie);
+        } catch (InvalidCapacityException e) {
+            System.out.println("✗ Exception caught: " + e.getMessage());
         }
     }
 }

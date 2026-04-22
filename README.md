@@ -25,6 +25,7 @@ Each use case introduces Java concepts through railway scenarios:
 10. **Regex Validation**: Validating Train ID and Cargo Code formats using Pattern and Matcher
 11. **Safety Compliance Check**: Validating goods bogies using Stream allMatch() with conditional safety rules
 12. **Performance Comparison**: Benchmarking loop-based vs stream-based filtering using System.nanoTime()
+13. **Custom Exception Handling**: Enforcing capacity constraints using InvalidCapacityException
 
 ## Prerequisites
 
@@ -64,6 +65,7 @@ TrainManagementApp/
 │   └── src/
 │       ├── Bogie.java
 │       ├── GoodBogie.java
+│       ├── InvalidCapacityException.java
 │       └── Main.java
 ```
 
@@ -76,3 +78,5 @@ TrainManagementApp/
 - Functional Programming paradigms
 - Business rule validation and safety compliance
 - Performance benchmarking and measurement-driven optimization
+- Custom Exceptions and Error Handling (try-catch-throw)
+- Fail-fast validation patterns
